@@ -1,0 +1,66 @@
+// NOVA örnek sitesi: küçük, bağımsız JS. Kapalı olsa da site çalışır.
+(function () {
+  document.documentElement.classList.add('js');
+
+  var header = document.querySelector('.header');
+  var toggle = document.querySelector('.menu-toggle');
+  var menu = document.getElementById('menu');
+
+  // Üst çubuk gölgesi
+  function onScroll() { header.classList.toggle('scrolled', window.scrollY > 10); }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Mobil menü
+  function setMenu(open) {
+    menu.classList.toggle('open', open);
+    toggle.setAttribute('aria-expanded', String(open));
+    toggle.setAttribute('aria-label', open ? 'Menüyü kapat' : 'Menüyü aç');
+  }
+  toggle.addEventListener('click', function () { setMenu(!menu.classList.contains('open')); });
+  menu.addEventListener('click', function (e) { if (e.target.tagName === 'A') setMenu(false); });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
+
+
+  // Hizmet kartından forma geçiş: hizmet otomatik seçilir
+  var select = document.querySelector('select[name="service"]');
+  document.querySelectorAll('.pick').forEach(function (a) {
+    a.addEventListener('click', function () {
+      var want = a.getAttribute('data-service').replace(/&amp;/g, '&');
+      if (!select) return;
+      Array.prototype.forEach.call(select.options, function (o) { if (o.text.trim() === want) select.value = o.value || o.text; });
+    });
+  });
+
+  // Galeri büyütme
+  var lb = document.getElementById('lightbox');
+  if (lb) {
+    var lbImg = lb.querySelector('.lb-img');
+    var closeLb = function () { lb.hidden = true; };
+    document.querySelectorAll('.g').forEach(function (g) {
+      var open = function () {
+        var m = getComputedStyle(g).backgroundImage.match(/url\([^)]+\)/);
+        lbImg.style.backgroundImage = m ? m[0] : 'none';
+        lb.hidden = false;
+      };
+      g.addEventListener('click', open);
+      g.addEventListener('keydown', function (e) { if (e.key === 'Enter') open(); });
+    });
+    lb.addEventListener('click', closeLb);
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLb(); });
+  }
+
+  // Kaydırınca belirme
+  var items = document.querySelectorAll('.card, .faq details, .heading, .about > div, .g, .step, .info, .form, .map');
+  items.forEach(function (el) { el.classList.add('reveal'); });
+  if (!('IntersectionObserver' in window)) {
+    items.forEach(function (el) { el.classList.add('in'); });
+    return;
+  }
+  var io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (en) {
+      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
+    });
+  }, { threshold: 0.12 });
+  items.forEach(function (el) { io.observe(el); });
+})();
