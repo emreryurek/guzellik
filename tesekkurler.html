@@ -1,65 +1,26 @@
-// NOVA örnek sitesi: küçük, bağımsız JS. Kapalı olsa da site çalışır.
-(function () {
-  document.documentElement.classList.add('js');
-
-  var header = document.querySelector('.header');
-  var toggle = document.querySelector('.menu-toggle');
-  var menu = document.getElementById('menu');
-
-  // Üst çubuk gölgesi
-  function onScroll() { header.classList.toggle('scrolled', window.scrollY > 10); }
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-
-  // Mobil menü
-  function setMenu(open) {
-    menu.classList.toggle('open', open);
-    toggle.setAttribute('aria-expanded', String(open));
-    toggle.setAttribute('aria-label', open ? 'Menüyü kapat' : 'Menüyü aç');
-  }
-  toggle.addEventListener('click', function () { setMenu(!menu.classList.contains('open')); });
-  menu.addEventListener('click', function (e) { if (e.target.tagName === 'A') setMenu(false); });
-  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
-
-
-  // Hizmet kartından forma geçiş: hizmet otomatik seçilir
-  var select = document.querySelector('select[name="service"]');
-  document.querySelectorAll('.pick').forEach(function (a) {
-    a.addEventListener('click', function () {
-      var want = a.getAttribute('data-service').replace(/&amp;/g, '&');
-      if (!select) return;
-      Array.prototype.forEach.call(select.options, function (o) { if (o.text.trim() === want) select.value = o.value || o.text; });
-    });
-  });
-
-  // Galeri büyütme
-  var lb = document.getElementById('lightbox');
-  if (lb) {
-    var lbImg = lb.querySelector('.lb-img');
-    var closeLb = function () { lb.hidden = true; };
-    document.querySelectorAll('.g').forEach(function (g) {
-      var open = function () {
-        lbImg.style.backgroundImage = getComputedStyle(g).backgroundImage;
-        lb.hidden = false;
-      };
-      g.addEventListener('click', open);
-      g.addEventListener('keydown', function (e) { if (e.key === 'Enter') open(); });
-    });
-    lb.addEventListener('click', closeLb);
-    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeLb(); });
-  }
-
-  // Kaydırınca belirme
-  var items = document.querySelectorAll('.card, .faq details, .heading, .about > div, .g, .step, .info, .form, .map');
-  items.forEach(function (el) { el.classList.add('reveal'); });
-  if (!('IntersectionObserver' in window)) {
-    items.forEach(function (el) { el.classList.add('in'); });
-    return;
-  }
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (en) {
-      if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); }
-    });
-  }, { threshold: 0.12 });
-  items.forEach(function (el) { io.observe(el); });
-})();
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex">
+<title>Teşekkürler | NOVA Güzellik Merkezi</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<section class="hero" style="min-height:100vh;justify-content:center;text-align:center">
+    <div class="hero-content">
+        <p class="eyebrow">TALEBİNİZ ALINDI</p>
+        <h1>Teşekkürler<em>.</em></h1>
+        <p class="lead" style="margin-left:auto;margin-right:auto">Randevu talebiniz bize ulaştı. En kısa sürede sizi arayarak gün ve saati netleştireceğiz.</p>
+        <div class="actions" style="justify-content:center">
+            <a href="index.html" class="btn">Ana Sayfaya Dön</a>
+            <a href="tel:+905555555555" class="btn ghost">Hemen Ara</a>
+        </div>
+    </div>
+</section>
+</body>
+</html>
