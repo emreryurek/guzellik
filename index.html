@@ -9,7 +9,23 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Playfair+Display:ital,wght@0,600;1,600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="ery-kit.css">
+<style>
+  /* ERY Kit renkleri ve yeni bölümler */
+  :root { --k-panel:#fff; --k-field:#fbf6f3; --k-line:#eadfdb; --k-text:#2a1f2d; --k-muted:#7a6b78; --k-accent:#4a2543; --k-on-accent:#fff; --k-radius:18px; --k-pill:12px; --k-font:'Inter',Arial,sans-serif; --k-shadow:0 20px 60px rgba(74,37,67,.25); }
+  .kit-lead { max-width: 600px; margin: -26px 0 36px; font-size: 17px; }
+  .steps .kit-lead { color: #e8dbe5; }
+  .packs-section { padding: 96px 7%; }
+  .hero-status { display: flex; flex-wrap: wrap; gap: 10px 16px; align-items: center; margin-top: 26px; }
+  .hero-status [data-k-next] { color: var(--plum); font-weight: 600; font-size: 14px; }
+  .k-pack h3, .k-loyal h3 { font-family: 'Playfair Display', Georgia, serif; color: var(--plum); }
+  .k-step b { font-family: Arial, sans-serif; }
+  .wa-float { bottom: 150px; }
+  @media (max-width: 700px) { .packs-section { padding: 56px 5%; } .kit-lead { margin: -16px 0 26px; font-size: 16px; } .wa-float { bottom: 158px; } }
+</style>
 <script src="script.js" defer></script>
+<script src="site.js" defer></script>
+<script src="ery-kit.js" defer></script>
 </head>
 <body>
 
@@ -27,12 +43,12 @@
     <nav id="menu">
         <a href="#hizmetler">Hizmetler</a>
         <a href="#hakkimizda">Hakkımızda</a>
-        <a href="#galeri">Galeri</a>
+        <a href="#kampanya">Kampanyalar</a>
         <a href="#randevu">Randevu</a>
         <a href="#sss">SSS</a>
         <a href="#iletisim">İletişim</a>
     </nav>
-    <a href="#iletisim" class="btn small head-cta">Randevu Al</a>
+    <a href="#randevu" class="btn small head-cta">Randevu Al</a>
     <button class="menu-toggle" type="button" aria-label="Menüyü aç" aria-expanded="false" aria-controls="menu"><span></span><span></span><span></span></button>
 </header>
 
@@ -43,8 +59,12 @@
         <h1>Kendinize <em>iyi</em> bakmanın zamanı.</h1>
         <p class="lead">Cilt bakımından kaş-kirpiğe, manikürden makyaja kadar tek adreste profesyonel bakım. Randevunuzu telefondan hemen alın.</p>
         <div class="actions">
-            <a href="#iletisim" class="btn">Randevu Oluştur</a>
-            <a href="tel:+905555555555" class="btn ghost">Hemen Ara</a>
+            <a href="#randevu" class="btn">Online Randevu Al</a>
+            <a href="#kampanya" class="btn ghost">Kampanyaları Gör</a>
+        </div>
+        <div class="hero-status">
+            <p data-k-open class="light">Pzt - Cmt / 10:00 - 19:00</p>
+            <p data-k-next></p>
         </div>
     </div>
 </section>
@@ -55,12 +75,12 @@
         <h2>Size özel bakım, tek yerde.</h2>
     </div>
     <div class="service-grid">
-        <article class="card"><div class="ic">✦</div><h3>Cilt Bakımı</h3><p>Cilt tipinize uygun temizlik, nem ve yenileyici bakım uygulamaları.</p><a class="pick" href="#iletisim" data-service="Cilt Bakımı">Randevu al →</a></article>
-        <article class="card"><div class="ic">✧</div><h3>Lazer Epilasyon</h3><p>Konforlu seanslarla pürüzsüz bir cilt. Seans planı size özel hazırlanır.</p><a class="pick" href="#iletisim" data-service="Lazer Epilasyon">Randevu al →</a></article>
-        <article class="card"><div class="ic">❀</div><h3>Manikür &amp; Pedikür</h3><p>Hijyenik ortamda tırnak bakımı, kalıcı oje ve nail art seçenekleri.</p><a class="pick" href="#iletisim" data-service="Manikür &amp; Pedikür">Randevu al →</a></article>
-        <article class="card"><div class="ic">◈</div><h3>Kaş &amp; Kirpik</h3><p>Yüz hatlarınıza uygun kaş tasarımı, kirpik lifting ve bakım.</p><a class="pick" href="#iletisim" data-service="Kaş &amp; Kirpik">Randevu al →</a></article>
-        <article class="card"><div class="ic">❋</div><h3>Makyaj</h3><p>Günlük, davet ve özel gün makyajı. Prova randevusu da alabilirsiniz.</p><a class="pick" href="#iletisim" data-service="Makyaj">Randevu al →</a></article>
-        <article class="card"><div class="ic">✺</div><h3>Saç Bakımı &amp; Fön</h3><p>Yıkama, fön ve bakım uygulamaları. Saç hizmetlerimizi randevuyla sunuyoruz.</p><a class="pick" href="#iletisim" data-service="Saç Bakımı &amp; Fön">Randevu al →</a></article>
+        <article class="card"><div class="ic">✦</div><h3>Cilt Bakımı</h3><p>Cilt tipinize uygun temizlik, nem ve yenileyici bakım uygulamaları.</p><a class="pick" href="#randevu" data-service="Cilt Bakımı" data-k-pick="cilt">Randevu al →</a></article>
+        <article class="card"><div class="ic">✧</div><h3>Lazer Epilasyon</h3><p>Konforlu seanslarla pürüzsüz bir cilt. Seans planı size özel hazırlanır.</p><a class="pick" href="#randevu" data-service="Lazer Epilasyon" data-k-pick="lazer">Randevu al →</a></article>
+        <article class="card"><div class="ic">❀</div><h3>Manikür &amp; Pedikür</h3><p>Hijyenik ortamda tırnak bakımı, kalıcı oje ve nail art seçenekleri.</p><a class="pick" href="#randevu" data-service="Manikür &amp; Pedikür" data-k-pick="mani">Randevu al →</a></article>
+        <article class="card"><div class="ic">◈</div><h3>Kaş &amp; Kirpik</h3><p>Yüz hatlarınıza uygun kaş tasarımı, kirpik lifting ve bakım.</p><a class="pick" href="#randevu" data-service="Kaş &amp; Kirpik" data-k-pick="kas">Randevu al →</a></article>
+        <article class="card"><div class="ic">❋</div><h3>Makyaj</h3><p>Günlük, davet ve özel gün makyajı. Prova randevusu da alabilirsiniz.</p><a class="pick" href="#randevu" data-service="Makyaj" data-k-pick="makyaj">Randevu al →</a></article>
+        <article class="card"><div class="ic">✺</div><h3>Saç Bakımı &amp; Fön</h3><p>Yıkama, fön ve bakım uygulamaları. Saç hizmetlerimizi randevuyla sunuyoruz.</p><a class="pick" href="#randevu" data-service="Saç Bakımı &amp; Fön" data-k-pick="fon">Randevu al →</a></article>
     </div>
 </section>
 
@@ -91,16 +111,21 @@
     </div>
 </section>
 
+<section class="packs-section" id="kampanya">
+    <div class="heading">
+        <p class="label">KAMPANYALAR</p>
+        <h2>Bu ayın fırsatları.</h2>
+    </div>
+    <div data-k-packs></div>
+</section>
+
 <section class="steps" id="randevu">
     <div class="heading">
-        <p class="label">NASIL RANDEVU ALIRSINIZ?</p>
-        <h2>Üç adımda hazırsınız.</h2>
+        <p class="label">ONLINE RANDEVU</p>
+        <h2>Bir dakikada randevunuzu alın.</h2>
     </div>
-    <div class="step-grid">
-        <div class="step"><b>01</b><p>Telefonla arayın, WhatsApp'tan yazın ya da aşağıdaki formu doldurun.</p></div>
-        <div class="step"><b>02</b><p>Size uygun gün ve saati birlikte belirleyelim.</p></div>
-        <div class="step"><b>03</b><p>Randevu saatinizde sizi ağırlayalım, bakımınıza başlayalım.</p></div>
-    </div>
+    <p class="kit-lead">Hizmetinizi, uzmanınızı ve saatinizi seçin. Talebiniz WhatsApp'tan bize ulaşır, onaylayıp size dönüş yaparız.</p>
+    <div data-k-booking></div>
 </section>
 
 <section class="faq" id="sss">
@@ -109,7 +134,7 @@
         <h2>Merak ettikleriniz.</h2>
     </div>
     <div class="faq-list">
-        <details><summary>Randevuyu nasıl alırım?</summary><p>Telefonla arayabilir, WhatsApp'tan yazabilir ya da aşağıdaki formu doldurabilirsiniz. Size dönüp gün ve saati birlikte belirleriz.</p></details>
+        <details><summary>Randevuyu nasıl alırım?</summary><p>Sayfadaki online randevu bölümünden hizmetinizi, uzmanınızı ve boş saati seçebilirsiniz. Dilerseniz telefonla arayabilir ya da WhatsApp'tan yazabilirsiniz.</p></details>
         <details><summary>Randevumu iptal edebilir miyim?</summary><p>Elbette. Planınız değişirse bir gün önceden haber vermeniz yeterli, yeni bir saat ayarlarız.</p></details>
         <details><summary>İlk seansta ne yapılır?</summary><p>Önce cildiniz ve beklentileriniz hakkında kısa bir görüşme yapılır, ardından size uygun uygulama planlanır.</p></details>
         <details><summary>Hijyen nasıl sağlanıyor?</summary><p>Kullanılan ekipmanlar her müşteriden sonra temizlenir, tek kullanımlık ürünler yenilenir.</p></details>
@@ -120,7 +145,7 @@
 <section class="contact" id="iletisim">
     <div class="heading">
         <p class="label">İLETİŞİM</p>
-        <h2>Randevu için bize ulaşın.</h2>
+        <h2>Bize ulaşın.</h2>
     </div>
     <div class="contact-grid">
         <div class="info">
@@ -139,8 +164,8 @@
             <input type="text" name="_honey" class="hp" tabindex="-1" autocomplete="off">
             <input type="text" name="name" placeholder="Adınız Soyadınız" autocomplete="name" required>
             <input type="tel" name="phone" placeholder="Telefon Numaranız" autocomplete="tel" required>
-            <select name="service" required>
-                <option value="">Hizmet Seçiniz</option>
+            <select name="service">
+                <option value="">Konu (isteğe bağlı)</option>
                 <option>Cilt Bakımı</option>
                 <option>Lazer Epilasyon</option>
                 <option>Manikür &amp; Pedikür</option>
@@ -148,8 +173,8 @@
                 <option>Makyaj</option>
                 <option>Saç Bakımı &amp; Fön</option>
             </select>
-            <textarea name="message" rows="4" placeholder="Gelmek istediğiniz gün ve saat"></textarea>
-            <button type="submit" class="btn">Randevu Talebi Gönder</button>
+            <textarea name="message" rows="4" placeholder="Mesajınız"></textarea>
+            <button type="submit" class="btn">Mesaj Gönder</button>
         </form>
     </div>
 
@@ -170,7 +195,7 @@
 <div class="lightbox" id="lightbox" hidden role="dialog" aria-modal="true" aria-label="Görsel"><button class="lb-close" aria-label="Kapat">×</button><div class="lb-img"></div></div>
 
 <div class="ery-demo">
-    <span>Bu site ERY Studio'nun örnek çalışmasıdır.</span>
+    <span>Bu site ERY Studio'nun örnek çalışmasıdır. Online randevu, kampanyalar ve asistan dahil.</span>
     <a href="https://wa.me/905325023600?text=Merhaba%2C%20g%C3%BCzellik%20salonu%20%C3%B6rne%C4%9Fini%20g%C3%B6rd%C3%BCm%2C%20bana%20da%20site%20istiyorum." target="_blank" rel="noopener">Size de hazırlayalım</a>
 </div>
 
